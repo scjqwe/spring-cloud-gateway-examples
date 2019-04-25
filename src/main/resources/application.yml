@@ -1,18 +1,22 @@
 server:
   port: 8000
-spring:
-  cloud:
-    gateway:
-      routes:
-      - uri: http://127.0.0.1:8001/hello/common
-#        order: 0
-        predicates:
-        - Path=/api/hello
-      - uri: http://127.0.0.1:8001/hello/2
-#        order: 1
-        predicates:
-        - Path=/api/hello/1
-      - uri: http://127.0.0.1:8001/hello/1
-#        order: 2
-        predicates:
-        - Path=/api/hello/2
+  servlet:
+    context-path: /gateway
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - uri: http://127.0.0.1:8001/hello/common
+#        predicates:
+#        - Path=/api/hello
+#      - uri: http://127.0.0.1:8001/hello/2
+#        predicates:
+#        - Path=/api/hello/1
+#      - uri: http://127.0.0.1:8001/hello/1
+#        predicates:
+#        - Path=/api/hello/2
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: null
+    database: 2
