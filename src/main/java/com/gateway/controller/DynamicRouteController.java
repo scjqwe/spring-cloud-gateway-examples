@@ -1,8 +1,9 @@
 package com.gateway.controller;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,27 +26,18 @@ public class DynamicRouteController {
 	private DynamicRouteService dynamicRouteService;
 
 	@RequestMapping("/add")
-	public String add(@RequestBody RouteDefinition definition) {
-		if (StringUtils.isBlank(definition.getId())) {
-			return "fail";
-		}
+	public String add(@Validated @RequestBody RouteDefinition definition) {
 		return dynamicRouteService.add(definition);
+	}
+
+	@RequestMapping("/update")
+	public String update(@Validated @RequestBody RouteDefinition definition) {
+		return dynamicRouteService.update(definition);
 	}
 
 	@RequestMapping("/delete")
 	public String delete(String id) {
-		if (StringUtils.isBlank(id)) {
-			return "fail";
-		}
 		return dynamicRouteService.delete(id);
-	}
-
-	@RequestMapping("/update")
-	public String update(@RequestBody RouteDefinition definition) {
-		if (StringUtils.isBlank(definition.getId())) {
-			return "fail";
-		}
-		return dynamicRouteService.update(definition);
 	}
 
 }

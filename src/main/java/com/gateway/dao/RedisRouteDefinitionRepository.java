@@ -3,12 +3,12 @@ package com.gateway.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
 import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,11 +23,12 @@ import com.alibaba.fastjson.JSON;
  * @author: 孙常军<br>
  * @date: 2019年4月25日<br>
  */
+@Component
 public class RedisRouteDefinitionRepository implements RouteDefinitionRepository {
 	// 路由前缀
 	private static final String GATEWAY_ROUTES = "geteway:routes";
 
-	@Resource
+	@Autowired
 	private StringRedisTemplate redisTemplate;
 
 	@Override
